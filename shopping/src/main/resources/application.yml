@@ -1,0 +1,13 @@
+#激活哪一个环境的配置文件
+#公共配置
+spring:
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+---
+spring:
+  profiles: dev
+server:
+  port: 8080
+

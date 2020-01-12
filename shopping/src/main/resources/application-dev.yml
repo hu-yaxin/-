@@ -1,0 +1,76 @@
+
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.105.121.249:3306/business?useUnicode=true&characterEncoding=utf-8
+    username: hyx
+    password: 971208
+    druid:
+      #初始化大小
+      initial-size: 8
+      #连接池最小值
+      min-idle: 8
+      #连接池最大值
+      max-active: 12
+      #配置获取连接等待超时的时间(单位：毫秒)
+      max-wait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接(单位：毫秒)
+      time-between-eviction-runs-millis: 2000
+      #配置一个连接在池中（含空闲）最小生存的时间(单位：毫秒)
+      min-evictable-idle-time-millis: 60000
+      #配置一个连接在池中空闲最大生存的时间(单位：毫秒)
+      max-evictable-idle-time-millis: 90000
+      #检测连接是否有效的测试语句
+      validation-query: select 1
+      #申请连接时执行validationQuery检测连接是否有效。此配置会造成一定性能降低
+      test-on-borrow: false
+      #申请连接的时候，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+      test-while-idle: true
+      #归还连接时执行validationQuery检测连接是否有效。此配置会造成一定性能降低
+      test-on-return: false
+      #打开后，增强timeBetweenEvictionRunsMillis的周期性连接检查，minIdle内的空闲连接，每次检查强制验证连接有效性. 参考：https://github.com/alibaba/druid/wiki/KeepAlive_cn
+      keep-alive: true
+      #是否缓存preparedStatement（也就是PSCache），PSCache对支持游标的数据库性能提升巨大，如：oracle，在mysql下建议关闭。具体查阅PSCache相关资料
+      pool-prepared-statements: false
+      #配置提交方式（默认值：true）
+      default-auto-commit: true
+
+      #连接泄露检查，打开removeAbandoned功能 , 连接从连接池借出后，长时间不归还，将触发强制回连接。回收周期随timeBetweenEvictionRunsMillis进行，如果连接为从连接池借出状态，并且未执行任何sql，并且从借出时间起已超过removeAbandonedTimeout时间，则强制归还连接到连接池中
+      remove-abandoned: true
+      #检查连接泄露依据（超时时间）
+      remove-abandoned-timeout-millis: 300000
+      #abanded连接时输出错误日志，方便出现连接泄露时可以通过错误日志定位忘记关闭连接的位置
+      log-abandoned: true
+
+      #配置监控统计拦截的filters
+      #filters:
+      #配置监控统计日志的输出间隔(单位：毫秒)，每次输出所有统计数据会重置，酌情开启
+      #time-between-log-stats-millis: 5000
+  thymeleaf:
+    mode: HTML5
+
+mybatis:
+  mapper-locations: classpath*:com/project/mapper/*Mapper.xml
+  type-aliases-package: com.project.pojo
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+business:
+  imageHost:  http://img.cdn.imbession.top/
+
+logging:
+  level:
+    com.project.dao : debug
+
+server:
+  port: 8888
+  servlet:
+    context-path: /
+
+
